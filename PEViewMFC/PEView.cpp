@@ -112,7 +112,7 @@ int pe::zzRvaToRaw(int RVA)
     int l_NumberOfSections = NULL;//节区头的数量
     pSections l_pSection;
 
-    l_pSectionHeader = (PIMAGE_SECTION_HEADER)( g_NtFileAddress + 0xf4);
+    l_pSectionHeader = (PIMAGE_SECTION_HEADER)( g_OptionalAddress + ((PIMAGE_FILE_HEADER)g_NtFileAddress)->SizeOfOptionalHeader);
     l_fileHeader = (PIMAGE_FILE_HEADER)g_NtFileAddress;
     l_NumberOfSections = l_fileHeader->NumberOfSections;
 
