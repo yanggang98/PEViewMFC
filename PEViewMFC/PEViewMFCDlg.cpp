@@ -89,7 +89,9 @@ BOOL CPEViewMFCDlg::OnInitDialog()
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 	//mShowEdit.SetWindowTextW(L"asdsad");
 	//UpdateData(FALSE);
-
+	//  D:\\逆向工程\\逆向科普\\练习\\1.CrackMe.exe
+	//  D:\\Software\\吾爱破解工具包\\Tools\\Others\\ipmsg.exe
+	//C:\\Windows\\WinSxS\\wow64_microsoft-windows-user32_31bf3856ad364e35_10.0.18362.959_none_2d5e5441335b7c69\\user32.dll
 	//pe mype("C:\\Windows\\WinSxS\\wow64_microsoft-windows-user32_31bf3856ad364e35_10.0.18362.959_none_2d5e5441335b7c69\\user32.dll");
 	//mype.showDoSHeader(this);
 	//mype.showNtFileHeader(this);
@@ -98,13 +100,16 @@ BOOL CPEViewMFCDlg::OnInitDialog()
 	//mype.showImportAddressTable(this);
 	//mype.showExportDirectory(this);
 	//mype.showBaeRelocationTable(this);
-	mCombo1.InsertString(0, L"无");
-	mCombo1.InsertString(1, L"DOS头");
-	mCombo1.InsertString(2, L"FILE头");
-	mCombo1.InsertString(3, L"可选头");
-	mCombo1.InsertString(4, L"地址导入表");
-	mCombo1.InsertString(5, L"地址导出表");
-	mCombo1.InsertString(6, L"基址重定位表");
+	m_editFont.CreatePointFont(100, L"微软雅黑");
+	mShowEdit.SetFont(&m_editFont);
+	mCombo1.InsertString(0, L"DOS头");
+	mCombo1.InsertString(1, L"FILE头");
+	mCombo1.InsertString(2, L"可选头");
+	mCombo1.InsertString(3, L"IID");
+	mCombo1.InsertString(4, L"IAT");
+	mCombo1.InsertString(5, L"INT");
+	mCombo1.InsertString(6, L"IED");
+	mCombo1.InsertString(7, L"基址重定位表");
 	mCombo1.SetCurSel(0);
 
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
@@ -194,7 +199,8 @@ void CPEViewMFCDlg::OnBnClickedButton1()
 	char* filePath = (char*)malloc(sizeof(char) * ansiiLen);
 
 	WideCharToMultiByte(CP_ACP, 0, str, -1, filePath, ansiiLen, nullptr, nullptr);
-	
+
+
 	//创建pe对象
 	pe l_pe(filePath);
 
@@ -209,26 +215,28 @@ void CPEViewMFCDlg::OnBnClickedButton1()
 
 	switch (index)
 	{
+
 	case 0:
-		mShowEdit.SetWindowTextW(L"请选择打印表");
-		UpdateData(FALSE);
-		break;	
-	case 1:
 		l_pe.showDoSHeader(this);
 		break;
-	case 2:
+	case 1:
 		l_pe.showNtFileHeader(this);
 		break;
-	case 3:
+	case 2:
 		l_pe.showOptionaHeader(this);
+		break;
+	case 3:
+		l_pe.showImportDirectoryTable(this);
 		break;
 	case 4:
 		l_pe.showImportAddressTable(this);
 		break;
 	case 5:
-		l_pe.showExportDirectory(this);
 		break;
 	case 6:
+		l_pe.showExportDirectory(this);
+		break;
+	case 7:
 		l_pe.showBaeRelocationTable(this);
 		break;
 	default:

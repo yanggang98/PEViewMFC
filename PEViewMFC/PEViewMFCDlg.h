@@ -35,5 +35,6 @@ public:
 	CEdit mEdit1;
 	CEdit mShowEdit;
 	CComboBox mCombo1;
+	CFont m_editFont;
 	afx_msg void OnBnClickedButton1();
 };
