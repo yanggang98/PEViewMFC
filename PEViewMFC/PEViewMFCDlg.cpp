@@ -192,19 +192,9 @@ void CPEViewMFCDlg::OnBnClickedButton1()
 	// TODO: 在此添加控件通知处理程序代码
 	CString str;
 	mEdit1.GetWindowText(str);
+	pe l_pe(str);
 
-	//unicode 转Ascii
-	int ansiiLen = WideCharToMultiByte(CP_ACP, 0, str, -1, nullptr, 0, nullptr, nullptr);
-
-	char* filePath = (char*)malloc(sizeof(char) * ansiiLen);
-
-	WideCharToMultiByte(CP_ACP, 0, str, -1, filePath, ansiiLen, nullptr, nullptr);
-
-
-	//创建pe对象
-	pe l_pe(filePath);
-
-	if (l_pe.g_DosAddress == NULL) 
+	if (l_pe.g_FileSize == 0x0) 
 	{
 		mShowEdit.SetWindowTextW(L"文件路径错误");
 		UpdateData(FALSE);
@@ -232,6 +222,7 @@ void CPEViewMFCDlg::OnBnClickedButton1()
 		l_pe.showImportAddressTable(this);
 		break;
 	case 5:
+		l_pe.showImportNameTable(this);
 		break;
 	case 6:
 		l_pe.showExportDirectory(this);
@@ -242,5 +233,4 @@ void CPEViewMFCDlg::OnBnClickedButton1()
 	default:
 		break;
 	}
-	free(filePath);
 }

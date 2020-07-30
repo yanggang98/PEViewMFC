@@ -4,7 +4,7 @@
 class pe
 {
 public:
-	pe(PCHAR FilePath);
+	pe(CString FilePath);
 	~pe();
 	//显示dos头
 	void showDoSHeader(CPEViewMFCDlg *dlg);
@@ -16,6 +16,8 @@ public:
 	void showImportDirectoryTable(CPEViewMFCDlg* dlg);
 	//显示IAT
 	void showImportAddressTable(CPEViewMFCDlg* dlg);
+	//显示INT 
+	void showImportNameTable(CPEViewMFCDlg* dlg);
 	//显示导出表
 	void showExportDirectory(CPEViewMFCDlg* dlg);
 	//显示重定位表
