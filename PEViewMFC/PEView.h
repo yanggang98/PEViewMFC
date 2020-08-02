@@ -22,9 +22,10 @@ public:
 	void showExportDirectory(CPEViewMFCDlg* dlg);
 	//显示重定位表
 	void showBaeRelocationTable(CPEViewMFCDlg* dlg);
-
 	//计算文件偏移
 	int zzRvaToRaw(int Rva);
+
+
 	//dos头的地址
 	BYTE* g_DosAddress;
 	//文件头的地址

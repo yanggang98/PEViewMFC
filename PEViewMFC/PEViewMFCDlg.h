@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "myCEdit.h"
 
 
 // CPEViewMFCDlg 对话框
@@ -32,9 +33,9 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	CEdit mEdit1;
-	CEdit mShowEdit;
+	myCEdit mEdit1;
 	CComboBox mCombo1;
 	CFont m_editFont;
 	afx_msg void OnBnClickedButton1();
+	CListCtrl mlist;
 };

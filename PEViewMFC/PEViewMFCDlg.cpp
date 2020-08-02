@@ -64,8 +64,8 @@ void CPEViewMFCDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_EDIT1, mEdit1);
-	DDX_Control(pDX, IDC_EDIT2, mShowEdit);
 	DDX_Control(pDX, IDC_COMBO1, mCombo1);
+	DDX_Control(pDX, IDC_LIST3, mlist);
 }
 
 BEGIN_MESSAGE_MAP(CPEViewMFCDlg, CDialogEx)
@@ -73,6 +73,8 @@ BEGIN_MESSAGE_MAP(CPEViewMFCDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &CPEViewMFCDlg::OnBnClickedButton1)
+	
+	ON_WM_LBUTTONDBLCLK()
 END_MESSAGE_MAP()
 
 
@@ -83,25 +85,14 @@ BOOL CPEViewMFCDlg::OnInitDialog()
 	CDialogEx::OnInitDialog();
 
 	// 将“关于...”菜单项添加到系统菜单中。
-
 	// IDM_ABOUTBOX 必须在系统命令范围内。
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 	//mShowEdit.SetWindowTextW(L"asdsad");
 	//UpdateData(FALSE);
-	//  D:\\逆向工程\\逆向科普\\练习\\1.CrackMe.exe
-	//  D:\\Software\\吾爱破解工具包\\Tools\\Others\\ipmsg.exe
+	//D:\\逆向工程\\逆向科普\\练习\\1.CrackMe.exe
+	//D:\\Software\\吾爱破解工具包\\Tools\\Others\\ipmsg.exe
 	//C:\\Windows\\WinSxS\\wow64_microsoft-windows-user32_31bf3856ad364e35_10.0.18362.959_none_2d5e5441335b7c69\\user32.dll
-	//pe mype("C:\\Windows\\WinSxS\\wow64_microsoft-windows-user32_31bf3856ad364e35_10.0.18362.959_none_2d5e5441335b7c69\\user32.dll");
-	//mype.showDoSHeader(this);
-	//mype.showNtFileHeader(this);
-	//mype.showOptionaHeader(this);
-	//mype.showImportDirectoryTable(this);
-	//mype.showImportAddressTable(this);
-	//mype.showExportDirectory(this);
-	//mype.showBaeRelocationTable(this);
-	m_editFont.CreatePointFont(100, L"微软雅黑");
-	mShowEdit.SetFont(&m_editFont);
 	mCombo1.InsertString(0, L"DOS头");
 	mCombo1.InsertString(1, L"FILE头");
 	mCombo1.InsertString(2, L"可选头");
@@ -196,8 +187,7 @@ void CPEViewMFCDlg::OnBnClickedButton1()
 
 	if (l_pe.g_FileSize == 0x0) 
 	{
-		mShowEdit.SetWindowTextW(L"文件路径错误");
-		UpdateData(FALSE);
+		MessageBox(L"文件路径错误");
 		return;
 	}
 
@@ -205,7 +195,6 @@ void CPEViewMFCDlg::OnBnClickedButton1()
 
 	switch (index)
 	{
-
 	case 0:
 		l_pe.showDoSHeader(this);
 		break;
@@ -234,3 +223,5 @@ void CPEViewMFCDlg::OnBnClickedButton1()
 		break;
 	}
 }
+
+
